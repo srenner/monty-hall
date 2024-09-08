@@ -8,7 +8,7 @@
                 <div class="card-header">
                     Door #1
                 </div>
-                <img src="../assets/door-closed-fill.svg" class="" />
+                <img src="../assets/door-closed-fill.svg" class="door" />
             </div>
         </div>
         <div class="col-md-4">
@@ -39,6 +39,8 @@
 </template>
 
 <style scoped>
-
+    .door {
+        cursor: pointer;
+    }
 </style>
   

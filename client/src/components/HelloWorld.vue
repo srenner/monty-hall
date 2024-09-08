@@ -12,7 +12,6 @@ defineProps<{
     Hello world!
   </h1>
     <h1 class="green">{{ msg }}</h1>
-    <InteractiveGame></InteractiveGame>!
   </div>
 </template>
 
