@@ -5,7 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <h1>The Monty Hall Problem</h1>
+    <h1 class="text-center">The Monty Hall Problem</h1>
   </header>
 
   <RouterView />
