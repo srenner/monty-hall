@@ -31,7 +31,37 @@ module.exports = async function (fastify, opts) {
     });
 
     fastify.post('/interactive', async function(request, reply) {
-        return '';
+        let initialDoor = request.query.door || fastify.randomDoor();
+        let winningDoor = fastify.randomDoor();
+
+        if(initialDoor === winningDoor) {
+            // host door can be either unchosen door
+        }
+        else {
+            // host door must be the only remaining loser door
+        }
+
+        let game = {
+            id: null,             
+            webid: fastify.uuid(),
+            initial_door: initialDoor,
+            winning_door: winningDoor,
+            host_door: null,
+            human_player: 1,
+            switch_door: null,
+            date_start: new Date(),
+            date_end: null
+        }
+
+        /** gamePartial is a subset of the game to keep some details secret */
+        let gamePartial = {
+            webid: game.webid,
+            initial_door: game.initial_door,
+            host_door: game.host_door
+        }
+
+
+        return gamePartial;
     });
 
     // END API ENDPOINTS //////////////////////////////////////////////////////
