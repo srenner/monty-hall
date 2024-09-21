@@ -9,13 +9,22 @@ module.exports = async function (fastify, opts) {
        return uuid.toString(16);
     });
   })
+
+  fastify.decorate('randomDoor', () => Math.floor(Math.random() * 3));
   
+  fastify.get('/random', async function(request, reply) {
+    return fastify.randomDoor();
+  });
 
   fastify.get('/uuid', async function(request, reply) {
     return fastify.uuid();
-  })
+  });
 
-  fastify.post('/game/interactive', async function(request, reply) {
+  fastify.post('/automated', async function(request, reply) {
+    return '';
+  });
+
+  fastify.post('/interactive', async function(request, reply) {
     return '';
   });
 
