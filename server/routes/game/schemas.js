@@ -84,6 +84,4 @@ const gamePartialView = {
     "required": ["webid", "initialDoor", "hostDoor"]
 }
 
-module.exports = {
-  game, gamePartialView
-}
+export * from 'schemas'

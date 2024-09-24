@@ -1,13 +1,15 @@
 'use strict'
 
-const {
-    game: gameSchema,
-    gamePartialView: gamePartialSchema
-    } = require('./schemas')
+// const {
+//     game: gameSchema,
+//     gamePartialView: gamePartialSchema
+//     } =  
+    
+//import {gameSchema, gamePartialSchema} from './schemas.js'
 
-const { gameService: GameService } = require('./service')
+import GameService from "./service.js";
 
-module.exports = async function (fastify, opts) {
+export default async function (fastify, opts) {
 
     // fastify.decorate('uuid', function () {
     //     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,

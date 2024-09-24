@@ -1,6 +1,6 @@
 'use strict'
 
-class GameService {
+export default class GameService {
     constructor () {
         //this.dbConn = dbConn
     } 
@@ -17,5 +17,3 @@ class GameService {
             });
     }
 }
-
-module.exports = GameService

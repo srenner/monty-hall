@@ -1,30 +1,26 @@
 'use strict'
-
-const path = require('node:path')
-const AutoLoad = require('@fastify/autoload')
-const GameService = require('./routes/game/service')
-
-const fp = require('fastify-plugin')
+import autoLoad from '@fastify/autoload'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+import fastify from 'fastify';
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+import GameService from './routes/game/service.js';
+import fp from 'fastify-plugin';
 
 // Pass --options via CLI arguments in command to enable these options.
 const options = {}
 
-
-
-module.exports = async function (fastify, opts) {
+let app = async function (fastify, opts) {
   // Place here your custom code!
 
-  //const fp = require('fastify-plugin')
-
-
-  fastify.register(AutoLoad, {
-    dir: path.join(__dirname, 'plugins'),
+  fastify.register(autoLoad, {
+    dir: join(__dirname, 'plugins'),
     options: Object.assign({}, opts)
   })
 
-
-  fastify.register(AutoLoad, {
-    dir: path.join(__dirname, 'routes'),
+  fastify.register(autoLoad, {
+    dir: join(__dirname, 'routes'),
     options: Object.assign({}, opts)
   })
 
@@ -32,6 +28,4 @@ module.exports = async function (fastify, opts) {
 
 
 
-
-
-module.exports.options = options
+export default app;
