@@ -12,7 +12,6 @@ import fp from 'fastify-plugin';
 const options = {}
 
 let app = async function (fastify, opts) {
-  // Place here your custom code!
 
   fastify.register(autoLoad, {
     dir: join(__dirname, 'plugins'),
@@ -25,7 +24,5 @@ let app = async function (fastify, opts) {
   })
 
 }
-
-
 
 export default app;
