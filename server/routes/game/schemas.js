@@ -57,6 +57,33 @@ const game = {
     "$comment": "TODO: set required fields"
 }
 
+const gamePartialView = {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://montyhall.dev/gamePartialView.schema.json",
+    "title": "Game (Partial)",
+    "description": "Partial details of a Monty Hall game",
+    "type": "object",
+    "properties": {
+        "webid": {
+            "description": "Player-facing unique identifier",
+            "type": "string"
+        },
+        "initialDoor": {
+            "description": "Initial door the player chose",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+        },
+        "hostDoor": {
+            "description": "The door the host shows to the user",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2
+        },
+    },
+    "required": ["webid", "initialDoor", "hostDoor"]
+}
+
 module.exports = {
-  game
+  game, gamePartialView
 }
