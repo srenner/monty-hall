@@ -1,13 +1,8 @@
 'use strict'
-
-// const {
-//     game: gameSchema,
-//     gamePartialView: gamePartialSchema
-//     } =  
     
-//import {gameSchema, gamePartialSchema} from './schemas.js'
-
+import schemas from './schemas.js'
 import GameService from "./service.js";
+const gameService = new GameService();
 
 export default async function (fastify, opts) {
 
@@ -15,10 +10,11 @@ export default async function (fastify, opts) {
 
     fastify.get('/random', async function(request, reply) {
         return fastify.randomDoor();
+        
     });
 
     fastify.get('/uuid', async function(request, reply) {
-        return fastify.gameService.getNewWebid();
+        return gameService.getNewWebid();
         
     });
 

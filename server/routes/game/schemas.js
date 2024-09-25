@@ -57,7 +57,7 @@ const game = {
     "$comment": "TODO: set required fields"
 }
 
-const gamePartialView = {
+const gamePartial = {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://montyhall.dev/gamePartialView.schema.json",
     "title": "Game (Partial)",
@@ -84,4 +84,4 @@ const gamePartialView = {
     "required": ["webid", "initialDoor", "hostDoor"]
 }
 
-export * from 'schemas'
+export default {game, gamePartial}
