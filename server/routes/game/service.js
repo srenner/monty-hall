@@ -9,6 +9,11 @@ export default class GameService {
         console.log('fetch ' + webid);
     }
 
+
+    async getRandomDoor() {
+        return Math.floor(Math.random() * 3);
+    }
+
     async getNewWebid() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,
             function(c) {

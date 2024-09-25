@@ -6,16 +6,12 @@ const gameService = new GameService();
 
 export default async function (fastify, opts) {
 
-    fastify.decorate('randomDoor', () => Math.floor(Math.random() * 3));
-
     fastify.get('/random', async function(request, reply) {
-        return fastify.randomDoor();
-        
+        return gameService.getRandomDoor();
     });
 
     fastify.get('/uuid', async function(request, reply) {
         return gameService.getNewWebid();
-        
     });
 
     fastify.post('/automated', async function(request, reply) {
