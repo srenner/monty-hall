@@ -19,8 +19,9 @@ export default async function (fastify, opts) {
     });
 
     fastify.post('/interactive', async function(request, reply) {
-        let initialDoor = request.query.door || fastify.randomDoor();
-        let winningDoor = fastify.randomDoor();
+        let webid = gameService.getNewWebid();
+        let initialDoor = request.query.door || gameService.getRandomDoor();
+        let winningDoor = gameService.getRandomDoor();
 
         if(initialDoor === winningDoor) {
             // host door can be either unchosen door
