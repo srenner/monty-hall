@@ -18,31 +18,41 @@ export default async function (fastify, opts) {
         return '';
     });
 
-    fastify.post('/interactive', async function(request, reply) {
-        let webid = gameService.getNewWebid();
-        let initialDoor = request.query.door || gameService.getRandomDoor();
-        let winningDoor = gameService.getRandomDoor();
 
-        if(initialDoor === winningDoor) {
-            // host door can be either unchosen door
+
+    fastify.route({
+        method: 'POST',
+        url: '/interactive',
+        schema: {
+            querystring: {
+                type: 'object',
+                properties: {
+                    door: { type: 'integer' }
+                }
+            },
+            response: {
+                200: {
+                    type: 'object',
+                    properties: {
+                        webid: { type: 'string' },
+                        initial_door: { type: 'integer' },
+                        host_door: { type: 'integer' }
+                    }
+                }
+            }
+        },
+        handler: async function (request, reply) {
+
+            let webid = await gameService.getNewWebid();
+            let initialDoor = request.query.door || await gameService.getRandomDoor();
+            let winningDoor = gameService.getRandomDoor();
+
+            reply.send({ 
+                webid: webid,
+                initial_door: initialDoor,
+                host_door: -1
+            })
         }
-        else {
-            // host door must be the only remaining loser door
-        }
-
-        // let gameObj = {
-        //     id: null,             
-        //     webid: fastify.uuid(),
-        //     initial_door: initialDoor,
-        //     winning_door: winningDoor,
-        //     host_door: null,
-        //     human_player: 1,
-        //     switch_door: null,
-        //     date_start: new Date(),
-        //     date_end: null
-        // }
-
-        return '-1';
-    });
+    })
 
 }
