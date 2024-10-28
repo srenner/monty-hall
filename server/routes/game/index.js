@@ -49,9 +49,10 @@ export default async function (fastify, opts) {
             let winningDoor = await gameService.getRandomDoor();
             let hostDoor = -1; // todo
             let dateStart = new Date();
+            let ip = request.ip;
 
             let repo = new DataRepository();
-            repo.insertInteractiveGame(webid, initialDoor, winningDoor, hostDoor, dateStart);
+            repo.insertInteractiveGame(webid, initialDoor, winningDoor, hostDoor, dateStart, ip);
             repo.close();
 
 
