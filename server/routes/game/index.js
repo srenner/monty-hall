@@ -3,6 +3,7 @@
 import schemas from './schemas.js'
 import GameService from "./service.js";
 const gameService = new GameService();
+import { DataRepository } from '../../data/DataRepository.js';
 
 export default async function (fastify, opts) {
 
@@ -45,12 +46,19 @@ export default async function (fastify, opts) {
 
             let webid = await gameService.getNewWebid();
             let initialDoor = request.query.door || await gameService.getRandomDoor();
-            let winningDoor = gameService.getRandomDoor();
+            let winningDoor = await gameService.getRandomDoor();
+            let hostDoor = -1; // todo
+            let dateStart = new Date();
+
+            let repo = new DataRepository();
+            repo.insertInteractiveGame(webid, initialDoor, winningDoor, hostDoor, dateStart);
+            repo.close();
+
 
             reply.send({ 
                 webid: webid,
                 initial_door: initialDoor,
-                host_door: -1
+                host_door: hostDoor
             })
         }
     })
