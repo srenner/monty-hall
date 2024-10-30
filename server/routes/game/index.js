@@ -51,7 +51,11 @@ export default async function (fastify, opts) {
             let dateStart = new Date();
             let ip = request.ip;
 
-            let repo = new DataRepository();
+            let repo = new DataRepository(function(err) { 
+                if(err) {
+                    console.error(err);
+                }
+            });
             repo.insertInteractiveGame(webid, initialDoor, winningDoor, hostDoor, dateStart, ip);
             repo.close();
 

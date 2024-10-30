@@ -2,9 +2,9 @@ import sqlite3 from 'sqlite3'
 sqlite3.verbose();
 
 export class DataRepository {
-    constructor(error_callback) {
+    constructor(callback) {
         
-        this.db = new sqlite3.Database('./data/montyhall.sqlite3', error_callback);
+        this.db = new sqlite3.Database('./data/montyhall.sqlite3', callback);
         
     }
 
@@ -20,6 +20,8 @@ export class DataRepository {
                 $ip: ip
             }
         );
+
+        console.log(this.lastID);
     }
 
     async insertAutomatedGame() {
