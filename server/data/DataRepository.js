@@ -24,6 +24,16 @@ export class DataRepository {
         console.log(this.lastID);
     }
 
+    async updateInteractiveGame(id, switch_door, date_end) {
+        this.db.run("UPDATE game_history SET swtich_door = $switch_door, date_end = $date_end " + 
+            "WHERE id = $id;", {
+                $switch_door: switch_door,
+                $date_end: date_end,
+                $id: id
+            }
+        );
+    }
+
     async insertAutomatedGame() {
 
     }
