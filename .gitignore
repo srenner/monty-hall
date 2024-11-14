@@ -1,2 +1,3 @@
 doc/
 server/data/*.sqlite*
+server/data/*.sqbpro
