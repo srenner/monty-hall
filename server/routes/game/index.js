@@ -19,8 +19,6 @@ export default async function (fastify, opts) {
         return '';
     });
 
-
-
     fastify.route({
         method: 'POST',
         url: '/interactive',
@@ -51,21 +49,51 @@ export default async function (fastify, opts) {
             let dateStart = new Date();
             let ip = request.ip;
 
-            let repo = new DataRepository(function(err) { 
-                if(err) {
-                    console.error(err);
-                }
+            let repo = new DataRepository(db_callback);
+            await repo.insertInteractiveGame(webid, initialDoor, winningDoor, hostDoor, dateStart, ip, function(err) {
+                fastify.log.info('lastID: ' + this.lastID);
+                repo.close();
+                reply.send({ 
+                    webid: webid,
+                    initial_door: initialDoor,
+                    host_door: this.lastID,
+                })
             });
-            repo.insertInteractiveGame(webid, initialDoor, winningDoor, hostDoor, dateStart, ip);
-            repo.close();
-
-
-            reply.send({ 
-                webid: webid,
-                initial_door: initialDoor,
-                host_door: hostDoor
-            })
+            return reply;
         }
     })
+
+    fastify.route({
+        method: 'POST',
+        url: '/interactive/finish',
+        schema: {
+            body: {
+                type: 'object',
+                properties: {
+                    webid: { type: 'string' },
+                    switch_door: { type: 'boolean' }
+                }
+            },
+            response: {
+                200: {
+                    type: 'object',
+                    properties: {
+                        webid: { type: 'string' },
+                        initial_door: { type: 'integer' },
+                        host_door: { type: 'integer' }
+                    }
+                }
+            }
+        },
+        handler: async function (request, reply) {
+            return false;
+        }
+    })
+
+    function db_callback(err) {
+        if(err) {
+            fastify.log.error(err);
+        }
+    }
 
 }
