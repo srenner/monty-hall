@@ -56,7 +56,7 @@ export default async function (fastify, opts) {
                 reply.send({ 
                     webid: webid,
                     initial_door: initialDoor,
-                    host_door: this.lastID,
+                    host_door: hostDoor,
                 })
             });
             return reply;
